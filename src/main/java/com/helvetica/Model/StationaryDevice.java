@@ -14,7 +14,7 @@ public class StationaryDevice extends Device{
     }
 
     @Override
-    public double getPower(){
+    public int getPower(){
         return currentDevice.getPower();
     }
 
@@ -26,7 +26,7 @@ public class StationaryDevice extends Device{
         this.currentDevice = device;
     }
 
-    enum stationaryDevices{
+    public enum stationaryDevices{
         STATIONARY_COMPUTER("stationary computer", 700),
         TV("TV", 180),
         REFRIGERATOR("refrigerator", 200),

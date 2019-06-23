@@ -39,6 +39,6 @@ public abstract class Device {
         this.state = !this.state;
     }
     public abstract void move(Point coordinateToSet);
-    public abstract double getPower();
+    public abstract int getPower();
 
 }

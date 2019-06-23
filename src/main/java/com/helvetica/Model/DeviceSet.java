@@ -36,7 +36,6 @@ public enum  DeviceSet {
         this.listOfDevices.addAll(Arrays.asList(devices));
     }
 
-
     private void addDevice(Device deviceToAdd){
         listOfDevices.add(deviceToAdd);
     }
@@ -52,8 +51,8 @@ public enum  DeviceSet {
         listOfDevices.sort(new DeviceComparator());
     }
 
-    public double calculatePower(){
-        double calculatedPower = 0;
+    public int calculatePower(){
+        int calculatedPower = 0;
         for(Device device : listOfDevices){
             if(device.getState()) calculatedPower += device.getPower();
         }

@@ -17,7 +17,7 @@ public class MobileDevice extends Device{
     }
 
     @Override
-    public double getPower(){
+    public int getPower(){
         return currentDevice.getPower();
     }
 
