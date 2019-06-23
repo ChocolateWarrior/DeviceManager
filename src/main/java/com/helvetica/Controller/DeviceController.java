@@ -12,14 +12,16 @@ public class DeviceController {
     private Viewer viewer;
     private DeviceSet deviceSet;
     private ConsoleReader consoleReader;
+    private Locale locale;
 
     public DeviceController(Viewer viewer, DeviceSet deviceSet, ConsoleReader consoleReader){
         this.viewer = viewer;
         this.deviceSet = deviceSet;
         this.consoleReader = consoleReader;
+        this.locale = new Locale("en");
     }
 
-    public void showMenu(){
+    private void showMenu(){
         viewer.viewMessage(viewer.getString(viewer.MENU));
     }
 
@@ -48,27 +50,33 @@ public class DeviceController {
         switch (num) {
             case 1:
                 this.deviceSet = DeviceSet.SMALL_FLAT;
-                viewer.viewMessage("Set small flat");
+                viewer.viewMessage(viewer.getString(viewer.SET_SMALL_FLAT));
                 break;
             case 2:
                 this.deviceSet = DeviceSet.AVERAGE_FLAT;
-                viewer.viewMessage("Set big flat");
+                viewer.viewMessage(viewer.getString(viewer.SET_BIG_FLAT));
 
                 break;
             case 3:
                 this.deviceSet = DeviceSet.BIG_HOUSE;
-                viewer.viewMessage("Set big house");
+                viewer.viewMessage(viewer.getString(viewer.SET_BIG_HOUSE));
 
                 break;
 
         }
     }
 
-//    public void changeLanguage(){
-////        Locale locale;
-////        if(Locale.getDefault() == )
-////
-//    }
+    private void changeLanguage(){
+
+        if(locale.getLanguage().equals("en")){
+            locale = new Locale("uk");
+        } else {
+            locale = new Locale("en");
+        }
+
+        viewer.changeResource(locale);
+
+    }
 
     public void startScenario(){
 
@@ -81,16 +89,19 @@ public class DeviceController {
                 choice = getUserNumber();
             }catch (java.lang.NumberFormatException e){
                 viewer.viewErrorMessage(viewer.getString(viewer.INPUT_EXCEPTION));
+                viewer.viewErrorMessage(viewer.getString(viewer.TRY_AGAIN));
+
             }
 
             switch (choice){
 
                 case 1: viewer.viewMessage(viewer.getString(viewer.OPTION1));
-                    int choiceOfSet = 0;
+                    int choiceOfSet;
                     try {
                         choiceOfSet = getUserNumber();
                     }catch (java.lang.NumberFormatException e){
                         viewer.viewErrorMessage(viewer.getString(viewer.INPUT_EXCEPTION));
+                        viewer.viewErrorMessage(viewer.getString(viewer.TRY_AGAIN));
                         break label;
                     }
                     setChosenSet(choiceOfSet);
@@ -111,10 +122,16 @@ public class DeviceController {
                     break;
 
                 case 5:
+                    changeLanguage();
                     viewer.viewMessage(viewer.getString(viewer.OPTION5));
+                    break;
 
-                default: break;
-//                    break label;
+                case 6: viewer.viewMessage(viewer.getString(viewer.BYE));
+                    break label;
+
+                default: viewer.viewMessage(viewer.getString(viewer.WRONG_OPTION));
+                    viewer.viewErrorMessage(viewer.getString(viewer.TRY_AGAIN));
+                    break;
 
             }
         }
