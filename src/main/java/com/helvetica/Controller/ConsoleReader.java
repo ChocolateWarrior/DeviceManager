@@ -6,11 +6,18 @@ public class ConsoleReader {
 
     private Scanner scanner;
 
+    /**
+     * Default constructor for ConsoleReader
+     */
     public ConsoleReader() {
         scanner = new Scanner(System.in);
     }
 
-    public int getInt() {
+    /**
+     * Method getInt
+     * @return (int)
+     */
+    int getInt() {
         int number;
         Scanner scanner = new Scanner(System.in);
         do {
@@ -22,11 +29,19 @@ public class ConsoleReader {
         return number;
     }
 
-    public String getLine(){
+    /**
+     * Delegated method from Scanner.nextLine()
+     * @return (String)
+     */
+    String getLine(){
         return scanner.nextLine();
     }
-//    public int getInt(){ return scanner.nextInt(); }
-    public boolean hasNextLine(){
+
+    /**
+     * Delegated method from Scanner.hasNextLine()
+     * @return (boolean)
+     */
+    boolean hasNextLine(){
         return scanner.hasNextLine();
     }
 }

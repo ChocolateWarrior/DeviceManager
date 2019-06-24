@@ -40,17 +40,25 @@ public enum  DeviceSet {
         listOfDevices.add(deviceToAdd);
     }
 
+    /**
+     * Getter for list of devices
+     * @return (List<Device>)
+     */
     public List<Device> getListOfDevices() {
         return listOfDevices;
     }
-//    public void setListOfDevices(DeviceSet) {
-//        this.listOfDevices = ;
-//    }
 
+    /**
+     * Method, sorts by power with comparator
+     */
     public void sortByPower(){
         listOfDevices.sort(new DeviceComparator());
     }
 
+    /**
+     * Method for calculating power
+     * @return (int) - calculated consuming power
+     */
     public int calculatePower(){
         int calculatedPower = 0;
         for(Device device : listOfDevices){
@@ -59,6 +67,12 @@ public enum  DeviceSet {
         return calculatedPower;
     }
 
+    /**
+     *
+     * @param bottomLimit - bottom limit for the search
+     * @param topLimit - top limit for the search
+     * @return (ArrayList<Device>) - found list of devices
+     */
     public ArrayList<Device> findDevicesByRange(double bottomLimit, double topLimit){
 
         ArrayList<Device> appropriateDevices = new ArrayList<>();
@@ -70,6 +84,10 @@ public enum  DeviceSet {
         return appropriateDevices;
     }
 
+    /**
+     * Overridden method toString
+     * @return (String)
+     */
     @Override
     public String toString(){
         StringBuilder res = new StringBuilder();

@@ -5,6 +5,9 @@ import com.helvetica.Controller.ResourceController;
 import java.util.Locale;
 
 public class Viewer {
+    /**
+     * constants for localization bundles
+     */
     public final String GREETING = "interface.welcome";
     public final String MENU = "interface.menu";
     public final String REQUEST_BOTTOM_LIMIT = "interface.bottomlimit";
@@ -25,18 +28,40 @@ public class Viewer {
 
 
     private ResourceController resourceController;
+
+    /**
+     * Constructor for viewer
+     */
     public Viewer(){
         this.resourceController = ResourceController.USER_INTERFACE;
     }
 
+    /**
+     * Method for viewing message
+     * @param msg (String) - string to view
+     */
     public void viewMessage(String msg){
         System.out.println(msg);
     }
+    /**
+     * Method for viewing error message
+     * @param msg (String) - string to view
+     */
     public void viewErrorMessage(String msg){ System.err.println(msg); }
+
+    /**
+     * Method for changing bundle locale resource
+     * @param locale (Locale) - locale to change
+     */
     public void changeResource(Locale locale) {
         resourceController.changeResource(locale);
     }
 
+    /**
+     * Method to get string from resource
+     * @param string - resource name
+     * @return (String)
+     */
     public String getString(String string){
         return resourceController.getString(string);
     }

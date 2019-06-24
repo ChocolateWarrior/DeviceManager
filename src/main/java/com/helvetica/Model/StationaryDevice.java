@@ -2,9 +2,17 @@ package com.helvetica.Model;
 
 public class StationaryDevice extends Device{
 
+    /**
+     * Overridden
+     * @param coordinateToSet (Point) - parameter to change
+     */
     @Override
     public void move(Point coordinateToSet) {}
 
+    /**
+     * Overridden method toString
+     * @return (String)
+     */
     @Override
     public String toString(){
         return "Device: " + currentDevice.getTitle() + "\n" +
@@ -13,6 +21,11 @@ public class StationaryDevice extends Device{
                 "Place: " + getPlace() + "\n";
     }
 
+    /**
+     * Overridden method to get power
+     * @return (int) - power
+     */
+
     @Override
     public int getPower(){
         return currentDevice.getPower();
@@ -20,12 +33,21 @@ public class StationaryDevice extends Device{
 
     private stationaryDevices currentDevice;
 
-    public StationaryDevice(boolean state, Point coordinate, stationaryDevices device){
+    /**
+     * Constructor for stationary device
+     * @param state (boolean)
+     * @param coordinate (Point)
+     * @param device (mobileDevices)
+     */
+    StationaryDevice(boolean state, Point coordinate, stationaryDevices device){
         setState(state);
         setCoordinate(coordinate);
         this.currentDevice = device;
     }
 
+    /**
+     * enum with possible stationary devices
+     */
     public enum stationaryDevices{
         STATIONARY_COMPUTER("stationary computer", 700),
         TV("TV", 180),
@@ -43,9 +65,6 @@ public class StationaryDevice extends Device{
             this.title = title;
             this.power = power;
         }
-
-        private void setTitle(String title) { this.title = title; }
-        private void setPower(int power) { this.power = power; }
 
         private String getTitle() { return title; }
         private int getPower() { return power; }

@@ -14,6 +14,12 @@ public class DeviceController {
     private ConsoleReader consoleReader;
     private Locale locale;
 
+    /**
+     * Constructor for DeviceController
+     * @param viewer (Viewer)
+     * @param deviceSet (DeviceSet)
+     * @param consoleReader (ConsoleReader)
+     */
     public DeviceController(Viewer viewer, DeviceSet deviceSet, ConsoleReader consoleReader){
         this.viewer = viewer;
         this.deviceSet = deviceSet;
@@ -31,7 +37,7 @@ public class DeviceController {
         return result;
     }
 
-    private ArrayList<Device> getByRange(){
+    private ArrayList<Device> getByRange() throws NumberFormatException{
         int bottomLimit = 0;
         int topLimit = 0;
 
@@ -63,6 +69,9 @@ public class DeviceController {
 
                 break;
 
+            default: viewer.viewMessage(viewer.getString(viewer.WRONG_OPTION));
+                break;
+
         }
     }
 
@@ -78,9 +87,14 @@ public class DeviceController {
 
     }
 
+    /**
+     * Method to execute, manages connection with user
+     * Contains private methods, needed for proper execution
+     */
     public void startScenario(){
 
         int choice = 0;
+
         viewer.viewMessage(viewer.getString(viewer.GREETING));
         label: while (true){
             showMenu();
@@ -90,7 +104,7 @@ public class DeviceController {
             }catch (java.lang.NumberFormatException e){
                 viewer.viewErrorMessage(viewer.getString(viewer.INPUT_EXCEPTION));
                 viewer.viewErrorMessage(viewer.getString(viewer.TRY_AGAIN));
-
+                startScenario();
             }
 
             switch (choice){
@@ -99,12 +113,12 @@ public class DeviceController {
                     int choiceOfSet;
                     try {
                         choiceOfSet = getUserNumber();
+                        setChosenSet(choiceOfSet);
                     }catch (java.lang.NumberFormatException e){
                         viewer.viewErrorMessage(viewer.getString(viewer.INPUT_EXCEPTION));
                         viewer.viewErrorMessage(viewer.getString(viewer.TRY_AGAIN));
-                        break label;
+                        break;
                     }
-                    setChosenSet(choiceOfSet);
                     break;
 
                 case 2:viewer.viewMessage(viewer.getString(viewer.OPTION2));
@@ -117,8 +131,14 @@ public class DeviceController {
                     break;
 
                 case 4: viewer.viewMessage(viewer.getString(viewer.OPTION4));
-                    ArrayList<Device> toShow = getByRange();
-                    viewer.viewMessage(toShow.toString());
+                    try {
+                        ArrayList<Device> toShow = getByRange();
+                        viewer.viewMessage(toShow.toString());
+                    }catch (java.lang.NumberFormatException e) {
+                        viewer.viewErrorMessage(viewer.getString(viewer.INPUT_EXCEPTION));
+                        viewer.viewErrorMessage(viewer.getString(viewer.TRY_AGAIN));
+                        break;
+                    }
                     break;
 
                 case 5:
